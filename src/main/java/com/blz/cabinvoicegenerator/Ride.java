@@ -1,8 +1,8 @@
 package com.blz.cabinvoicegenerator;
 
 public class Ride {
-    public double distance;
-    public int time;
+    private double distance;
+    private int time;
 
     public Ride(double distance, int time) {
         this.distance = distance;

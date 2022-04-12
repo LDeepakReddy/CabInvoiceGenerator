@@ -27,13 +27,38 @@ public class InvoiceServiceTest {
         double totalFare = invoiceService.calculateFare(rides);
         Assert.assertEquals(350, totalFare, 0);
     }
+
     @Test
     public void givenMultipleRides_ShouldReturnInvoiceSummery() {
         Ride[] rides = {new Ride(2.0, 5),
                 new Ride(5.0, 10)};
         InvoiceSummery invoiceSummery = invoiceService.calculateTotalFare(rides);
-        InvoiceSummery expectedInvoice=new InvoiceSummery(2,85);
-        Assert.assertEquals(expectedInvoice,invoiceSummery);
+        InvoiceSummery expectedInvoice = new InvoiceSummery(2, 85);
+        Assert.assertEquals(expectedInvoice, invoiceSummery);
     }
+
+    @Test
+    public void givenUserID_ShouldReturnInvoiceSummeryForParticularUser() {
+        String userID = "Deepak";
+        Ride[] rides = {new Ride(2.0, 5),
+                new Ride(5.0, 10)};
+        invoiceService.addRide(userID, rides);
+        InvoiceSummery invoiceSummery = invoiceService.getInvoiceSummery(userID);
+        InvoiceSummery expectedInvoice = new InvoiceSummery(2, 85);
+        Assert.assertEquals(expectedInvoice, invoiceSummery);
+
+    }
+
+    @Test
+    public void givenUserID_ShouldReturnInvoiceSummeryForParticularUsers() {
+        String userID1 = "tejaswini";
+        Ride[] rides = {new Ride(5.0, 15),
+                new Ride(7.0, 50)};
+        invoiceService.addRide(userID1, rides);
+        InvoiceSummery invoiceSummery = invoiceService.getInvoiceSummery(userID1);
+        InvoiceSummery expectedInvoice = new InvoiceSummery(2, 185);
+        Assert.assertEquals(expectedInvoice, invoiceSummery);
+    }
+
 }
 
