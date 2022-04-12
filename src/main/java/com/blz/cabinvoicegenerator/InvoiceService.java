@@ -17,4 +17,8 @@ public class InvoiceService {
         }
         return totalFare;
     }
+    public InvoiceSummery calculateTotalFare(Ride[] rides) {
+        double totalFare = calculateFare(rides);
+        return new InvoiceSummery(rides.length, totalFare);
+    }
 }
