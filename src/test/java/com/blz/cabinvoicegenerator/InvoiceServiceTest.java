@@ -46,7 +46,6 @@ public class InvoiceServiceTest {
         InvoiceSummery invoiceSummery = invoiceService.getInvoiceSummery(userID);
         InvoiceSummery expectedInvoice = new InvoiceSummery(2, 85);
         Assert.assertEquals(expectedInvoice, invoiceSummery);
-
     }
 
     @Test
