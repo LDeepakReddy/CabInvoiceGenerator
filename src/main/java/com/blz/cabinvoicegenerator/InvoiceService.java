@@ -1,21 +1,37 @@
 package com.blz.cabinvoicegenerator;
 
+import java.util.Scanner;
+
 public class InvoiceService {
     RideRepository rideRepository=new RideRepository();
-    private final double COST_PER_KM = 10.0;
-    private final int COST_PER_MINUTE = 1;
-    private final double MIN_FARE = 5.0;
+    public double calculateFare(double distance, int time, String choice) {
+        int costPerMinute = 0;
+        double costPerKM = 0;
+        double minimumFare = 0;
 
+        if (choice == "Normal" ) {
 
-    public double calculateFare(double distance, int time) {
-        double totalFare = (distance * COST_PER_KM) + (time * COST_PER_MINUTE);
-        return Math.max(totalFare, MIN_FARE);
+            costPerMinute = 1;
+            costPerKM = 10;
+            minimumFare = 5;
+
+        } else if (choice == "Premium") {
+
+            costPerMinute = 2;
+            costPerKM = 15;
+            minimumFare = 20;
+
+        }
+
+        double totalFare = distance * costPerKM + time * costPerMinute;
+        return Math.max(totalFare, minimumFare);
+
     }
 
     public double calculateFare(Ride[] rides) {
         double totalFare = 0.0;
         for (Ride ride : rides) {
-            totalFare += calculateFare(ride.getDistance(), ride.getTime());
+            totalFare += calculateFare(ride.getDistance(), ride.getTime(),"Normal");
         }
         return totalFare;
     }
