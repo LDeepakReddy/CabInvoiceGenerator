@@ -69,6 +69,11 @@ public class InvoiceServiceTest {
         Assert.assertEquals(95, totalFare, 0.0);
 
     }
+    @Test
+    public void givenDistanceAndTime_ShouldReturnMinimumTotalFareforPremium() {
+        double totalFare = invoiceService.calculateFare(0.1, 1, "Premium");
+        Assert.assertEquals(20, totalFare, 0);
+    }
 
 }
 
